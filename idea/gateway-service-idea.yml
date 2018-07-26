@@ -16,3 +16,12 @@ spring:
 logging:
   level:
     org.springframework.cloud.zookeeper: INFO
+
+management:
+  info:
+    git:
+      mode: full
+  endpoints:
+    web:
+      exposure:
+        include: "*"
