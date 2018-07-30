@@ -35,10 +35,20 @@ spring:
           destination: account
           consumer:
             header-mode: raw
+          group: account-registration-group
 
 kafka:
   topics:
     account: account
+
+management:
+  info:
+    git:
+      mode: full
+  endpoints:
+    web:
+      exposure:
+        include: "*"
 
 logging:
   level:
