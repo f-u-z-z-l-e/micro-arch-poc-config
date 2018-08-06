@@ -10,8 +10,6 @@ spring:
         streams:
           binder:
             brokers: kafka
-            configuration:
-              commit-interval.ms: 1000
           bindings:
             account-in:
               consumer:
@@ -23,6 +21,13 @@ spring:
           consumer:
             header-mode: raw
           group: account-balance-group
+  kafka:
+    producer:
+      bootstrap-servers: kafka:9092
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+    template:
+      default-topic: account
 
 logging:
   level:

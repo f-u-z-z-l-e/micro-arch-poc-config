@@ -2,19 +2,6 @@ server:
   port: 8081
 
 spring:
-  kafka:
-    consumer:
-      auto-commit-interval: 100ms
-      bootstrap-servers: kafka:9092
-      enable-auto-commit: true
-      group-id: s1pGroup
-      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
-      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      properties:
-        spring:
-          json:
-            trusted:
-              packages: ch.fuzzle.event.account
   cloud:
     zookeeper:
       connect-string: zookeeper:2181
@@ -23,8 +10,6 @@ spring:
         streams:
           binder:
             brokers: kafka
-            configuration:
-              commit-interval.ms: 1000
           bindings:
             account-in:
               consumer:
@@ -36,10 +21,13 @@ spring:
           consumer:
             header-mode: raw
           group: account-registration-group
-
-kafka:
-  topics:
-    account: account
+  kafka:
+    producer:
+      bootstrap-servers: kafka:9092
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+    template:
+      default-topic: account
 
 management:
   info:
