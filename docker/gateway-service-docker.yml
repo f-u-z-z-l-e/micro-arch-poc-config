@@ -2,16 +2,22 @@ server:
   port: 8080
 
 spring:
-  kafka:
-    producer:
-      bootstrap-servers: kafka:9092
-      key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
-    template:
-      default-topic: account
   cloud:
     zookeeper:
       connect-string: zookeeper:2181
+    gateway:
+      routes:
+      - id: registration-service
+        uri: lb://account-registration-service
+        predicates:
+        - Path=/api/v1/account/**
+      - id: balance-service
+        uri: lb://account-balance-service
+        predicates:
+        - Path=/api/v1/balance/**
+      discovery:
+        locator:
+          enabled: true
 
 logging:
   level:
