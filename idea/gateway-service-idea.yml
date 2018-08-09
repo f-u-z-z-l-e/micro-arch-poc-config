@@ -18,6 +18,9 @@ spring:
       discovery:
         locator:
           enabled: true
+  zipkin:
+    sender:
+      type: kafka
 
 logging:
   level:
