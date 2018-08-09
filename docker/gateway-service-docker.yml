@@ -18,9 +18,15 @@ spring:
       discovery:
         locator:
           enabled: true
+  sleuth:
+    sampler:
+      probability: 1.0
   zipkin:
     sender:
       type: kafka
+  kafka:
+    producer:
+      bootstrap-servers: kafka:9092
 
 logging:
   level:
