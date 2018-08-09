@@ -41,3 +41,7 @@ management:
 logging:
   level:
     org.springframework.cloud.zookeeper: INFO
+
+store:
+  properties:
+    foo: Property value loaded from Config Server
