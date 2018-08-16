@@ -3,6 +3,14 @@ server:
 
 spring:
   cloud:
+    vault:
+      scheme: http
+      host: localhost
+      port: 8200
+      connection-timeout: 5000
+      read-timeout: 15000
+      authentication: TOKEN
+      token: myroot
     zookeeper:
       connect-string: zookeeper:2181
     stream:
